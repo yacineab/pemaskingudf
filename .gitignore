@@ -1,0 +1,30 @@
+# intellij idea
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+.bsp
+
+#general
+*.class
+
+# mac
+.DS_Store
+
+# data
+*.csv
+*.dat
+
+#maven
+log/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
