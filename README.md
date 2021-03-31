@@ -1,5 +1,5 @@
 # About
-Le but de ce projet est d'etendre l'implimentation de l'UDF Masking Hash de hive aux types de données numérique.
+Le but de ce projet est d'etendre l'implémentation  de l'UDF Masking Hash de hive aux types de données numérique.
 Les types supportés par cette version sont:
 **STRING, VARCHAR, CHAR, INT, BIGINT**
 
@@ -12,9 +12,9 @@ Artifact | Version
 **Hadoop** | 3.1.1.7.1.6.0-297
 **Hive** | 3.1.3000.7.1.6.0-297
 
-# Fonctionnalitée 
+# Fonctionnalitées 
 - Hash des données de types **STRING, VARCHAR, CHAR** en utilisant l'algorithme *sha256Hex*
-- Hash des données de types **Int, BigInt** en implimentant l'algorithme the standard multiplicative hashing algorithm
+- Hash des données de types **Int, BigInt** en implémentant l'algorithme the standard multiplicative hashing algorithm
 
 
 # Build du projet
@@ -24,7 +24,7 @@ Artifact | Version
 `mvn test`
 
 # Utilisation de l'UDF
-## Build du projet et uplaod le Jar dans HDFS
+## Build du projet et chargement le Jar dans HDFS
 ###### Direct Reference 
 1. Upload le jar dans hdfs dans le chemin où les udfs sont stockées.
 
@@ -32,7 +32,7 @@ Exemple:
 ```shell
 hdfs dfs -put pemaskingudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/udfpath/
 ```
-## Register l'UDF
+## Enregistrer l'UDF
 
 1. En utilisant beeline se connecter à HiveServer avec un user qui a les accès **UDF**
 1. Selection la base de données à utiliser
@@ -48,7 +48,7 @@ Dans le cas de la méthode de configuration JAR **Direct Reference**, vous inclu
 
     > Si vous utilisez une autre méthode, vous n'incluez pas l'emplacement JAR. Le chargeur de classe peut trouver le fichier JAR.
 
-1. Verifier que l'udf est enregistrée
+1. Vérifier que l'udf est enregistrée
     ```shell
     SHOW FUNCTIONS like "%pe%";
    ```   
@@ -68,7 +68,7 @@ Supposons que nous avons la table suivante:
 +---------------+------------------+---------------+---------------------+
 ```
 
-## Requete en utilisant l'udf de hashage 
+### Requete en utilisant l'udf de hashage 
 **Requete**
 ```shell
 select default.pe_mask_udf(personne.nom), prenom, default.pe_mask_udf(personne.age),default.pe_mask_udf(personne.tel) from peudf.personne;
@@ -99,7 +99,7 @@ select default.pe_mask_udf(personne.nom), prenom, default.pe_mask_udf(personne.a
    pe_mask_udf({col})
    ```
 
-> **NB** Le mode opératoir pour l'application de l'udf dans les **Resources based policies** est le même qu'avec les **tag based policies**
+> **NB** Le mode opératoire pour l'application de l'udf dans les **Resources based policies** est le même qu'avec les **tag based policies**
 
 # Algorithme Hashing des entiers
 > Nous avons utilisé le MurmurHash Algorithm créé par Austin Appleby en 2008
@@ -138,7 +138,7 @@ return (a*Key) >>> (w-m);
 
 ### Choix des constantes W et M
 
-> Les constante ont été choisie dans l'implementation afin de garantir les trois points:
+> Les constantes ont été choisies dans l'implémentation afin de garantir les trois points:
 > - Eviter les collisions
 > - Assurer une distribution maximale des clés hashées
 > - Garantir l'idempotence

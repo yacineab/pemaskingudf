@@ -62,9 +62,7 @@ public class HashFunctions {
             key ^= (key >>> 31); // x >> 32 equivalent key mod 2^31
             res = key;
         }
-
         return res;
-
     }
 
 }
