@@ -1,14 +1,31 @@
-import org.apache.hadoop.hive.common.type.Date;
-
 import static java.lang.Math.toIntExact;
-import static org.apache.parquet.hadoop.util.counters.BenchmarkCounter.getTime;
+
 
 public class HashFunctions {
 
     /**
+     * @author Yacine A.
+     * Java Class where hashing functions are implemented
+     * For theses functions we used the MurmurHash Algorithm created by Austin Appleby in 2008
+     * The algorithm is an implemntation of the standard multiplicative hashing algorithm
+     *  - Ha(Key)=(a*K mod W)/(W/M)
+     * if we chose W and M as pow of 2 we get :
+     *  - Ha(Key)=(aK mod 2^w)/2^(w-n)
+     * This is special because arithmetic modulo 2^w is done by default in low-level programming languages and integer division by a power of 2 is simply a right-shift,
+     * which we could write return (a*K) >>> (w-m);
      *
-     * @param key
-     * @return
+     * So the constant chosen to be used int the implementation bellow were found to:
+     * - Avoid collision
+     * - Have the best distribution of the hashed key
+     * - Grantie idempotence
+     */
+
+
+
+    /**
+     *
+     * @param key the key to hash = value in hive column
+     * @return the hashed value
      */
     static Integer hashInt(Integer key) {
         key ^= key >>> 16; // x >> 16 equivalent x mod 2^16
@@ -21,8 +38,14 @@ public class HashFunctions {
 
     /**
      *
-     * @param key
-     * @return
+     * @param key the key to hash = value in hive column
+     * @return the hashed value
+     *
+     * If the value if key could be casted to an Int without overflow:
+     * - we call the function hashInt
+     * else
+     * - We implement the algorithme to hash Long values
+     *
      */
     static Long hashLong(Long key) {
         long res;

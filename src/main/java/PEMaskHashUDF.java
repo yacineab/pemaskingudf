@@ -1,9 +1,18 @@
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.hadoop.hive.common.type.Date;
+import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 
+@Description(name = "pe_mask_hash",
+        value = "returns hash of the given value",
+        extended = "Examples:\n "
+                + "  pe_mask_hash(value)\n "
+                + "Arguments:\n "
+                + "  value - value to mask. Supported types: STRING, VARCHAR, CHAR, INT, BIGINT"
+)
+
 public class PEMaskHashUDF extends BaseMaskUDF {
-    public static final String UDF_NAME = "mask_hash";
+    public static final String UDF_NAME = "pe_mask_hash";
 
     public PEMaskHashUDF() {
         super(new MaskHashTransformer(), UDF_NAME);
@@ -29,12 +38,22 @@ class MaskHashTransformer extends AbstractTransformer {
         return null;
     }
 
+    /**
+     *
+     * @param value value to transform
+     * @return hashedInt of the Value
+     */
     @Override
     Integer transform(final Integer value) {
         return HashFunctions.hashInt(value);
 
     }
 
+    /**
+     *
+     * @param value value to transform
+     * @return hashedLong of the Value
+     */
     @Override
     Long transform(final Long value) {
         return HashFunctions.hashLong(value);
