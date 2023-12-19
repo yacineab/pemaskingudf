@@ -3,18 +3,18 @@ import org.apache.hadoop.hive.common.type.Date;
 import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 
-@Description(name = "pe_mask_hash",
+@Description(name = "universalhashudf",
         value = "returns hash of the given value",
         extended = "Examples:\n "
-                + "  pe_mask_hash(value)\n "
+                + "  universalhashudf(value)\n "
                 + "Arguments:\n "
                 + "  value - value to mask. Supported types: STRING, VARCHAR, CHAR, INT, BIGINT"
 )
 
-public class PEMaskHashUDF extends BaseMaskUDF {
-    public static final String UDF_NAME = "pe_mask_hash";
+public class UniversalHashUDF extends BaseMaskUDF {
+    public static final String UDF_NAME = "universalhashudf";
 
-    public PEMaskHashUDF() {
+    public UniversalHashUDF() {
         super(new MaskHashTransformer(), UDF_NAME);
     }
 }

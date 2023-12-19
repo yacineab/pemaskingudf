@@ -48,7 +48,7 @@ mvn test
 
 Upload the JAR to the HDFS path where UDFs are stored. For instance:
 ```shell
-hdfs dfs -put pemaskingudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/udfpath/
+hdfs dfs -put universalhashudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/udfpath/
 ```
 
 ## Registering the UDF
@@ -61,13 +61,13 @@ hdfs dfs -put pemaskingudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/udfp
    ```
 3. Register the UDF, adjusting the command based on your cluster configuration:
    ```shell
-   CREATE FUNCTION pe_mask_udf AS 'PEMaskHashUDF' USING JAR 'hdfs:///udf/hdfspath/pemaskingudf-CDP7.1.5-version-jar-with-dependencies.jar';
+   CREATE FUNCTION universalhashudf AS 'UniversalHashUDF' USING JAR 'hdfs:///udf/hdfspath/universalhashudf-CDP7.1.5-version-jar-with-dependencies.jar';
    ```
    > If your configuration differs, adjust the JAR location accordingly.
 
 4. Verify the UDF registration:
    ```shell
-   SHOW FUNCTIONS like "%pe%";
+   SHOW FUNCTIONS like "%hash%";
    ```
    
 ## Example Usage
@@ -90,10 +90,10 @@ Execute the query:
 
 ```sql
 SELECT 
-    default.pe_mask_udf(person.name), 
+    default.universalhashudf(person.name), 
     firstname, 
-    default.pe_mask_udf(person.age), 
-    default.pe_mask_udf(person.phone) 
+    default.universalhashudf(person.age), 
+    default.universalhashudf(person.phone) 
 FROM 
     peudf.person;
 ```
@@ -119,7 +119,7 @@ FROM
 3. Select the applicable role/group/user.
 4. In 'Policy Conditions', check "select".
 5. In 'Component Permissions', select **HIVE**.
-6. Under 'Select Masking Option', choose **Custom** and input **pe_mask_udf({col})**.
+6. Under 'Select Masking Option', choose **Custom** and input **universalhashudf({col})**.
 
 
 > Similar steps apply for **Resource-Based Policies**.
