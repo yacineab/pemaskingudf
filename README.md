@@ -9,12 +9,12 @@ The current version supports the following data types: **STRING, VARCHAR, CHAR, 
 
 ## Environment Versions
 
-Artifact | Version
-------- | -------
-**CDP Version** | 7.1.8
-**Java** | 11
-**Hadoop** | 3.1.1.7.1.8.0-801
-**Hive** | 3.1.3000.7.1.8.0-801
+| Artifact        | Version              |
+|-----------------|----------------------|
+| **CDP Version** | 7.1.8                |
+| **Java**        | 11                   |
+| **Hadoop**      | 3.1.1.7.1.8.0-801    |
+| **Hive**        | 3.1.3000.7.1.8.0-801 |
 
 ---
 # Features
@@ -170,7 +170,7 @@ return (a * Key) >>> (w-m);
 
 ### Int Implementation
 
-```Java
+```
 key ^= key >>> 16; 
 key *= 0x85ebca6b;
 key ^= key >>> 13; 
@@ -181,7 +181,7 @@ return key;
 
 ### Long Implementation
 
-```Java
+```
 key += 0x9e3779b97f4a7c15L;
 key ^= (key >>> 30); 
 key *= 0xbf58476d1ce4e5b9L;
