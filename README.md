@@ -48,7 +48,7 @@ mvn test
 
 Upload the JAR to the HDFS path where UDFs are stored. For instance:
 ```shell
-hdfs dfs -put universalhashudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/udfpath/
+hdfs dfs -put universalhashudf-CDP7.1.8.0-801-jar-with-dependencies.jar /hdfs/udfpath/
 ```
 
 ## Registering the UDF
@@ -61,7 +61,7 @@ hdfs dfs -put universalhashudf-CDP7.1.5-version-jar-with-dependencies.jar /hdfs/
    ```
 3. Register the UDF, adjusting the command based on your cluster configuration:
    ```shell
-   CREATE FUNCTION universalhashudf AS 'UniversalHashUDF' USING JAR 'hdfs:///udf/hdfspath/universalhashudf-CDP7.1.5-version-jar-with-dependencies.jar';
+   CREATE FUNCTION universalhashudf AS 'UniversalHashUDF' USING JAR 'hdfs:///udf/hdfspath/universalhashudf-CDP7.1.8.0-801-jar-with-dependencies.jar';
    ```
    > If your configuration differs, adjust the JAR location accordingly.
 
